@@ -1,41 +1,96 @@
-import React, {Dispatch, ReactElement, SetStateAction} from 'react';
+import {
+  Dispatch,
+  FormEventHandler,
+  ReactElement,
+  SetStateAction,
+  useRef,
+} from 'react';
 import './Addmovie.css';
 import {IMovie} from '../interfaces';
-import {ratings} from '../constants';
+import {genres, ratings} from '../constants';
+import {Tgenre, Trating} from '../types';
 
 type TAddMovieProps = {
   setAddedMovies: Dispatch<SetStateAction<IMovie[]>>;
 };
 
 export function Addmovie({setAddedMovies}: TAddMovieProps): ReactElement {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = e => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formProps = Object.fromEntries(formData);
+
+    setAddedMovies(prev => [
+      ...prev,
+      {
+        title: formProps.title as string,
+        rating: parseInt(formProps.rating as string) as Trating,
+        genre: formProps.genre as Tgenre,
+        description: formProps.description as string,
+        id: Date.now().toString(),
+      },
+    ]);
+    formRef.current?.reset();
+  };
+
   return (
     <section className='add-movie'>
       <h2 className='header'>Let's add a movie!</h2>
-      <form className='form'>
-        <div>
+      <form ref={formRef} onSubmit={onSubmit} className='form'>
+        <div className='input-container'>
           <label htmlFor='title'>Title</label>
-          <input id='title' required minLength={1} />
-        </div>
-        <div>
-          <label htmlFor='rating'>Rating</label>
-          <input
-            type='range'
-            id='rating'
-            min={1}
-            max={5}
-            step={1}
-            list='markers'
-          />
-          <datalist id='markers'>
-            {ratings.map(r => (
-              <option key={r} label={r.toString()} value={r}></option>
-            ))}
-          </datalist>
+          <input name='title' id='title' required minLength={1} />
         </div>
 
-        <div>
+        <div className='input-container'>
+          <label htmlFor='rating'>Rating</label>
+          <div className='range-container'>
+            <input
+              name='rating'
+              required
+              type='range'
+              id='rating'
+              min={1}
+              max={5}
+              step={1}
+              list='markers'
+            />
+            <datalist id='markers'>
+              {ratings.map(r => (
+                <option key={r} label={r.toString()} value={r}></option>
+              ))}
+            </datalist>
+          </div>
+        </div>
+
+        <div className='input-container'>
           <label htmlFor='genre'>Genre</label>
-          <select id='genre'></select>
+          <select name='genre' required id='genre'>
+            <option className='select-items' value={''}>
+              --Please choose a genre--
+            </option>
+            {genres.map(g => (
+              <option className='select-items' key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className='input-container'>
+          <label htmlFor='desc'>Description</label>
+          <textarea name='description' id='desc' />
+        </div>
+
+        <div className='btns-container'>
+          <button type='reset' id='clear'>
+            Clear
+          </button>
+          <button id='add' type='submit'>
+            Add
+          </button>
         </div>
       </form>
     </section>

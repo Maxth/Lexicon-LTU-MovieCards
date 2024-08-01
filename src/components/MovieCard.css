@@ -1,0 +1,33 @@
+.movie-card {
+  border: 1px dashed aquamarine;
+  background-color: black;
+  padding: 1rem;
+  width: 250px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+h4,
+h6,
+p {
+  color: aquamarine;
+}
+
+h4 {
+  font-size: 2rem;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+h6 {
+  font-size: 1rem;
+}

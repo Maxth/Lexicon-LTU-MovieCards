@@ -5,4 +5,5 @@ export interface IMovie {
   rating: Trating;
   genre: Tgenre;
   description: string;
+  id: string;
 }

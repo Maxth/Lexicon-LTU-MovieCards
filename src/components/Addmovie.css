@@ -1,6 +1,7 @@
 .add-movie {
   border: 2px dashed aquamarine;
-  padding: 4rem;
+  padding: 2rem;
+  width: 40vw;
 }
 
 h2 {
@@ -13,6 +14,7 @@ h2 {
 label {
   background-color: black;
   color: aquamarine;
+  height: min-content;
 }
 
 .form {
@@ -20,7 +22,18 @@ label {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.range-container {
+  display: flex;
+  flex-direction: column;
 }
 
 datalist {
@@ -31,29 +44,30 @@ datalist {
   width: 200px;
 }
 
-input[type='range'] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+input,
+select {
   width: 200px;
+}
+
+input[type='range'] {
+  width: 200px;
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   background: transparent; /* Otherwise white in Chrome */
-  overflow: hidden;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
-  width: 100%;
   cursor: pointer;
   background: white;
   border: 1px solid black;
 }
 
 input[type='range']:focus::-webkit-slider-runnable-track {
-  overflow: hidden;
   background: black;
   border: 1px solid aquamarine;
 }
 
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
-
   height: 20px;
   width: 20px;
   background: white;
@@ -69,4 +83,39 @@ input:focus {
   background-color: black;
   color: aquamarine;
   border: 1px solid aquamarine;
+}
+
+#desc {
+  height: 150px;
+  width: 200px;
+  resize: none;
+}
+
+#desc:focus {
+  outline: none;
+  background-color: black;
+  color: aquamarine;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.btns-container button {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+#clear {
+  background-color: lightcoral;
+  color: antiquewhite;
+  border: 1px solid aquamarine;
+}
+
+#add {
+  background-color: aquamarine;
+  color: black;
+  border: 1px solid black;
 }
