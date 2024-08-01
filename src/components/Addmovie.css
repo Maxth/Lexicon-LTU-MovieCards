@@ -51,8 +51,8 @@ select {
 
 input[type='range'] {
   width: 200px;
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  background: transparent; /* Otherwise white in Chrome */
+  -webkit-appearance: none;
+  background: transparent;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
